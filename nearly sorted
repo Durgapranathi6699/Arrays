@@ -1,0 +1,27 @@
+ArrayList <Integer> nearlySorted(int arr[], int num, int k)
+    {
+        ArrayList <Integer> l=new  ArrayList <Integer>();
+         PriorityQueue<Integer> pq=new PriorityQueue();
+         for(int i=0;i<=k;i++){
+             pq.add(arr[i]);
+             }
+        for(int i=k+1;i<num;i++){
+            l.add(pq.remove());
+         pq.add(arr[i]); 
+            
+        }
+        while(pq.size()>0){
+            l.add(pq.remove());
+            }
+        return l; }}
+        //DOES NOT WORK FOR ALL TEST CASES
+        /*  while(k>0){
+         for(int i=num-1;i>=1;i--){
+          if(arr[i]<arr[i-1]){
+              int temp=arr[i];
+              arr[i]=arr[i-1];
+              arr[i-1]=temp; }  } k--;}
+    for(int i=0;i<num;i++){
+        l.add(arr[i]); }
+    return l;
+*/
