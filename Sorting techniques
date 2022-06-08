@@ -1,0 +1,169 @@
+class Solution {
+    public void swap(int[] arr, int i1, int i2){
+        int temp = arr[i1];
+        arr[i1] = arr[i2];
+        arr[i2] = temp;
+    }
+    
+    public void mergeSort(int[] arr){
+        int len = arr.length;
+        
+        // since we keep dividing until a single element is left in each array
+        if(len<2){ // that is len = 0 or 1
+            return;
+        }
+        
+        int mid = len/2;
+        int[] left = new int[mid];
+        int[] right = new int[len - mid];
+        
+        // adding elements from array to left and right subarrays
+        for(int i=0; i<mid; i++){
+            left[i] = arr[i];
+        }
+        for(int i=mid; i<len; i++){
+            right[i-mid] = arr[i];
+        }
+        
+        mergeSort(left);
+        mergeSort(right);
+        
+        // merging the left and right arrays into the main array
+        merge(arr, left, right);
+    }
+    
+    public void merge(int[] arr, int[] arr1, int[] arr2){
+        int i = 0, j = 0, k = 0; // initialising all the three arrays
+        while(i<arr1.length && j<arr2.length){ // until one array ends
+            if(arr1[i]>=arr2[j]){
+                arr[k] = arr2[j];
+                j++;
+            }else{
+                arr[k] = arr1[i];
+                i++;
+            }
+            k++;
+        }
+        
+        // adding the leftover arrays elements
+        while(i<arr1.length){
+            arr[k] = arr1[i];
+            i++;
+            k++;
+        }
+        while(j<arr2.length){
+            arr[k] = arr2[j];
+            j++;
+            k++;
+        }
+    }
+    
+    public void quickSort(int[] arr, int lowI, int highI){
+        if(lowI>=highI){
+            return;
+        }
+        
+        int pivot = arr[highI];
+        int leftPointer = lowI;
+        int rightPointer = highI;
+        
+        while(leftPointer < rightPointer){
+            while(arr[leftPointer] <= pivot && leftPointer < rightPointer){
+                leftPointer++;
+            }
+            while(arr[rightPointer] >= pivot && leftPointer < rightPointer){
+                rightPointer--;
+            }
+            swap(arr, leftPointer, rightPointer);
+        }
+        swap(arr, leftPointer, highI);
+        quickSort(arr, lowI, leftPointer - 1);
+        quickSort(arr, leftPointer + 1, highI);
+    }
+    
+    public int[] sortArray(int[] nums) {
+        
+        // using a PREDEFINED FUNCTION
+        Arrays.sort(nums);
+        // uses quicksort for primitive types
+        return nums;
+        
+        // NOTE:THIS ALGORITHM IS ONLY FOR KNOWLEDGE PURPOSE BECAUSE IT WILL GIVE YOU TLE FOR THIS PROBLEM.
+        // BUBBLE SORT
+        // TC worst case = O(n^2) & best case also = O(n^2)
+        // SC = O(1) 
+        // Stable, inplace
+        for(int i=0; i<nums.length-1; i++){ // for n-1 rounds
+            for(int j=0; j<nums.length-1; j++){
+                if(nums[j]>nums[j+1]){
+                    swap(nums, j, j+1);
+                }
+            }
+        }
+        return nums;
+        
+        // NOTE:THIS ALGORITHM IS ONLY FOR KNOWLEDGE PURPOSE BECAUSE IT WILL GIVE YOU TLE FOR THIS PROBLEM.
+        // REVISED BUBBLE SORT
+        // TC worst case = O(n^2) & best case also = O(n)
+        // SC = O(1) 
+        // Stable, inplace
+        for(int i=0; i<nums.length-1; i++){ // for n-1 rounds
+            boolean flag = false;
+            for(int j=0; j<nums.length-1; j++){
+                if(nums[j]>nums[j+1]){
+                    swap(nums, j, j+1);
+                    flag = true;
+                }
+            }
+            if(flag==false){
+                break;
+            }
+        }
+        return nums;
+        
+        // NOTE:THIS ALGORITHM IS ONLY FOR KNOWLEDGE PURPOSE BECAUSE IT WILL GIVE YOU TLE FOR THIS PROBLEM.
+        // SELECTION SORT
+        // TC worst case = O(n^2) & best case also = O(n^2)
+        // SC = O(1) 
+        // unstable, inplace
+        for(int i=0; i<nums.length; i++){
+            int minIndex = i; // first element index is selected as the min
+            int j;
+            for(j=i+1; j<nums.length; j++){
+                if(nums[j]<nums[minIndex]){
+                    minIndex = j;
+                }
+            }
+            swap(nums, i, minIndex);
+        }
+        return nums;
+        
+        // NOTE:THIS ALGORITHM IS ONLY FOR KNOWLEDGE PURPOSE BECAUSE IT WILL GIVE YOU TLE FOR THIS PROBLEM.
+        // INSERTION SORT
+        // TC worst case = O(n^2) & best case also = O(n)
+        // SC = O(1) 
+        // stable, inplace
+        for(int i=1; i<nums.length; i++){
+            for(int j=i; j>0; j--){
+                if(nums[j-1]>nums[j]){
+                    swap(nums, j, j-1);
+                }
+            }
+        }
+        return nums;
+        
+        // MERGE SORT
+        // TC worst case = O(nlogn) & best case also = O(nlogn)
+        // SC = O(n) 
+        // stable, not inplace
+        mergeSort(nums);
+        return nums;
+        
+        // QUICK SORT
+        // TC worst case = O(nlogn) & best case also = O(n^2)
+        // SC = O(n) 
+        // not stable, inplace
+        quickSort(nums, 0, nums.length-1);
+        return nums;
+    }
+}
