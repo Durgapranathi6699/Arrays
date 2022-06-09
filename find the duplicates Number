@@ -1,0 +1,26 @@
+class Solution {
+    public int findDuplicate(int[] nums) {
+        //IN CYCLIC SORT 1 TO N CRT INDEX=NUMS[I]-1 0 TO N RANGE CRT INDEX NUMS[I]
+        //cyclic sort check swap move
+        int i=0;
+        while(i<nums.length){
+            if(nums[i]!=i+1){//IF NO.IS NOT AT CRT INDEX
+                int crt=nums[i]-1;//KNOW ITS CRT INDEX
+                if(nums[i]!=nums[crt]){
+                   swap(i,crt,nums);//SWAP WITH CRT INDEX
+                  }else{
+                   return nums[i]; //IT IT IS AT CRT INDEX RETURN IT
+                }
+            }
+                else{//AT START ITSELF ITS AT CRT INDEX THEN DONT DO ANY THING JUST MOVE BECAUSE WE NEED WRONG /DUPLICATE ELEMNT
+                i++;
+            }
+        }
+        return -1;   
+    }
+   void swap(int i,int crt,int nums[]){
+        int temp=nums[i];
+        nums[i]=nums[crt];
+        nums[crt]=temp;
+    }
+}
