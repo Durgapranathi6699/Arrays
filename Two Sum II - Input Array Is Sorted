@@ -1,0 +1,28 @@
+class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+          int[] ans=new int[2];
+        // for(int i=0;i<numbers.length;i++){
+        //     for(int j=i+1;j<numbers.length;j++){
+        //         if(numbers[i]+numbers[j]==target){
+        //             ans[0]=i+1;
+        //             ans[1]=j+1;
+        //         }
+        //     }
+        // }
+        // return ans;
+        //TWO POINTERS O(N)
+        int p=0;int q=numbers.length-1;
+        while(p<q){
+            if(numbers[p]+numbers[q]==target){
+                ans[0]=p+1;
+                ans[1]=q+1;
+            }
+            if(numbers[p]+numbers[q]<target){
+                p++;
+            }else{
+                q--;
+            }
+        }
+        return ans;
+    }
+}
