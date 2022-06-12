@@ -1,0 +1,17 @@
+https://leetcode.com/problems/calculate-amount-paid-in-taxes/
+class Solution {
+    public double calculateTax(int[][] brackets, int income) {
+        int pre=0; double sum=0;
+      for(int a[]:brackets){
+          int upper=a[0];int percent=a[1];
+          if(income>=upper){
+              sum+=0.01*(upper-pre)*percent;
+              pre=upper;
+          }else{
+              sum+=0.01*(income-pre)*percent;
+              return sum;
+          }
+      }
+        return sum;
+    }
+}
