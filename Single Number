@@ -1,0 +1,27 @@
+https://leetcode.com/problems/single-number/
+class Solution {
+    public int singleNumber(int[] nums) {
+         int xor=0;//xor with 0 gives that number itself
+                  //xor with same number gives 0   ex:2 2 1 ,2^2=0 0^1=1(unique)
+        for(int i=0;i<nums.length;i++){
+          xor=xor^nums[i];
+        }
+        return xor;
+
+    }
+}
+//       HashMap<Integer,Integer> map=new HashMap<>();
+//         for(int i=0;i<nums.length;i++){
+//             if(!map.containsKey(nums[i])){
+//                 map.put(nums[i],1);
+//             }else{
+//                 map.put(nums[i],map.get(nums[i])+1);
+//             }
+//         }
+//         for(Map.Entry<Integer,Integer> entry:map.entrySet()){
+ //         if(entry.getValue()==1){
+//                 return entry.getKey();
+//             }
+//         }
+//       return -1;  
+       
