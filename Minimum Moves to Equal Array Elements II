@@ -1,0 +1,20 @@
+class Solution {
+    public int minMoves2(int[] nums) {
+       // Arrays.sort(nums);
+       //  int n=nums.length;
+       //  int median=(n%2==0)?(nums[n/2]+nums[n/2-1])/2:nums[n/2];
+       //  int count=0;
+       //  for(int num:nums){
+       //      count+=Math.abs(median-num);//no.of steps depend on difference of each num with median
+       //  }
+       //  return count;
+        Arrays.sort(nums);int count=0;
+        int i=0;int j=nums.length-1;
+        while(i<j){
+            count=count+(nums[j]-nums[i]);//just differenec of 1 st and last gives us no.of steps after sorting
+            i++;
+            j--;
+        }
+        return count;
+    }
+}
