@@ -1,0 +1,19 @@
+ HashMap<Integer,Integer> map=new HashMap<>();//prefix sum  index
+    
+    int sum=0;
+    int max=0;
+    for(int i=0;i<n;i++){
+        sum=sum+arr[i];
+        if(sum==0){
+            max=i+1;
+        }else{
+            //if map conatins prefix sum already dont put that in map just calculate length by 
+           // substracting curindex-index stored in map--->gives length
+            if(map.containsKey(sum)){
+                max=Math.max(max,i-map.get(sum));
+            }else{
+                map.put(sum,i);
+            }
+        }
+    }
+    return max;
