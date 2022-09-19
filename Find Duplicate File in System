@@ -1,0 +1,30 @@
+class Solution {
+    public List<List<String>> findDuplicate(String[] paths) {
+        //key  content
+        //value directory/filename
+        Map<String,List<String>> map=new HashMap<>();
+        List<List<String>> ans=new ArrayList<>();
+        for(String path:paths){
+            String s[]=path.split(" ");
+            String root=s[0];//1 st part
+            for(int i=1;i<s.length;i++){
+                //file name is from space to (
+                String filename=s[i].substring(0,s[i].indexOf("("));
+                //content is blw ()
+                String content=s[i].substring(s[i].indexOf("(")+1,s[i].length()-1);
+                //if map already contains with content enter in same list
+               List<String>  value=map.getOrDefault(content,new ArrayList<>());
+                value.add(root+"/"+filename);
+                map.put(content,value);
+              
+            }
+        }
+        for(List<String> a:map.values()){
+            //only duplicate file paths 
+            if(a.size()>=2){
+                ans.add(a);
+            }
+        }
+        return ans;
+    }
+}
