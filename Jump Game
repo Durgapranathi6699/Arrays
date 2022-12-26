@@ -1,0 +1,15 @@
+class Solution {
+    public boolean canJump(int[] nums) {
+         int lastpos=nums.length-1;
+        for(int i=nums.length-1;i>=0;i--){
+            if(i+nums[i]>=lastpos){
+                lastpos=i;
+            }
+        }
+        return lastpos==0;
+    }
+}
+//1.start from last index
+//2.check whether u can reach from previous index to last index (i+nums[i]>=lastpos)
+//3.if u can pass in step 2 update lastpos to continue checking for index to reach to respective positions
+//4.return true if u can reach to  starting index
