@@ -1,0 +1,32 @@
+class Solution {
+    public long putMarbles(int[] weights, int k) {
+        //divide into k bags
+        //if ith and j th weights are considered then all weights should go into the same bag
+        //to satisfy the condition divide into k parts 
+        //we will have k starting points
+        int min=weights[0];//as we consider 1 st as a starting point
+        
+        int max=weights[0];
+        List<Integer> cost=new ArrayList<>();
+        for(int i=1;i<weights.length;i++){
+            //still we need k-1 starting points
+            //so store all possible starting values
+            //if we are considering ith bag as starting then our cost increseses by weights[i]+weights[i-1]
+            //weights[i-1] for previous part
+            cost.add(weights[i]+weights[i-1]);
+        }
+        Collections.sort(cost);
+        //get minimimum k-1 values
+        //all possible values are stored in cost list
+        for(int i=0;i<k-1;i++){
+            min=min+cost.get(i);
+        }
+        Collections.reverse(cost);
+        //get maximum k-1 values
+         for(int i=0;i<k-1;i++){
+            max=max+cost.get(i);
+        }
+        return max-min;
+    }
+    
+}
