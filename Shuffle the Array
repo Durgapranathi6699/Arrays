@@ -1,0 +1,15 @@
+class Solution {
+    public int[] shuffle(int[] nums, int n) {
+         int ans[]=new int[2*n];
+         int i=0;//pointing to 1 st half
+         int j=n;//pointing to 2 nd half
+         int k=0;
+         while(i<n && j<2*n){
+             //move both the pointer 
+             //store the value
+             ans[k++]=nums[i++];
+             ans[k++]=nums[j++];
+         }
+         return ans;
+    }
+}
